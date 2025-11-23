@@ -29,7 +29,7 @@ def setup_browser():
     # аттачи
     attach.add_screenshot(browser)
     attach.add_logs(browser)
-    attach.add_video(browser)
+    # attach.add_video(browser)
     attach.add_html(browser)
 
     browser.quit()
