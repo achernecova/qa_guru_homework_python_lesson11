@@ -16,6 +16,7 @@ def setup_browser():
         "enableVNC": True,
         "enableVideo": True
     })
+    options.set_capability("goog:loggingPrefs", {'browser': 'ALL'})  # Включаем логирование браузера
 
     browser.config.driver_remote_url = "https://user1:1234@selenoid.autotests.cloud/wd/hub"
     browser.config.driver_options = options
