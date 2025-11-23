@@ -25,7 +25,8 @@ def setup_browser():
     yield
 
     attach.add_screenshot(browser)
-    # attach.add_logs(browser) - не работает. надо задать вопрос кураторам
+    # TODO - не работает прикрепление логов. Ошибка в дженкинсе AttributeError: 'WebDriver' object has no attribute 'get_log'
+    # attach.add_logs(browser)
     attach.add_html(browser)
 
     browser.quit()
