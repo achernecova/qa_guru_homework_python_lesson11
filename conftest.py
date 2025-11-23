@@ -9,6 +9,7 @@ def setup_browser():
     options = ChromeOptions()
     options.set_capability("browserName", "chrome")
     options.set_capability("browserVersion", "128.0")
+    options.add_argument("--window-size=1280,900")
     options.set_capability("selenoid:options", {
         "enableVNC": True,
         "enableVideo": True
