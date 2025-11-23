@@ -24,6 +24,6 @@ def setup_browser():
     yield
 
     attach.add_screenshot(browser)
-    # attach.add_logs(browser)
+    attach.add_logs(browser)
 
     browser.quit()
