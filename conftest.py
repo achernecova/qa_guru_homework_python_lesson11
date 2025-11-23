@@ -16,15 +16,12 @@ def setup_browser():
         "enableVNC": True,
         "enableVideo": True
     })
-    driver = webdriver.Chrome(options=chrome_options)
-    # Передаем драйвер в Selene
-    browser.config.driver = driver
 
     browser.config.driver_remote_url = "https://user1:1234@selenoid.autotests.cloud/wd/hub"
     browser.config.driver_options = chrome_options
     browser.config.timeout = 6
 
-    yield driver
+    yield
 
     # аттачи
     attach.add_screenshot(browser)
