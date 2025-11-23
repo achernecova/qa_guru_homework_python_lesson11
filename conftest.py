@@ -26,8 +26,12 @@
 
 
 import pytest
+from allure_commons._allure import attach
 from selene import browser
 from selenium.webdriver.chrome.options import Options as ChromeOptions
+from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
+from utils import attach
 
 
 @pytest.fixture(scope="function", autouse=True)
@@ -46,6 +50,12 @@ def setup_browser():
     browser.config.timeout = 6
 
     yield
+
+    # аттачи
+    attach.add_screenshot(browser.driver)
+    attach.add_logs(browser.driver)
+    attach.add_video(browser.driver)
+    attach.add_html(browser.driver)
 
     browser.quit()
 
