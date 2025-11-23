@@ -25,6 +25,7 @@ def setup_browser():
     yield
 
     attach.add_screenshot(browser)
-    attach.add_logs(browser)
+    # attach.add_logs(browser) - не работает. надо задать вопрос кураторам
+    attach.add_html(browser)
 
     browser.quit()
