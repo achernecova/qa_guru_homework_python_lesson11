@@ -35,7 +35,7 @@ def test_open_page_softmg_contact():
         page = HeaderPanel()
         page.open()
     with allure.step("В меню переходим по пункту Контакты"):
-        page.open_page_about_as()
+        page.open_page_contact()
         page_contact = ContactPage()
     with allure.step("Проверяем, что мы находимся на нужной странице - заголовок соответствует заданному"):
         page_contact.data_page()
@@ -52,7 +52,7 @@ def test_open_page_softmg_contact():
         page = HeaderPanel()
         page.open()
     with allure.step("В меню переходим по пункту Кейсы"):
-        page.open_page_about_as()
+        page.open_page_cases()
         page_cases = CasesPage()
     with allure.step("Проверяем, что мы находимся на нужной странице - заголовок соответствует заданному"):
         page_cases.data_page()
