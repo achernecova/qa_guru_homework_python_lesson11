@@ -46,7 +46,7 @@ def test_open_page_softmg_contact():
 @allure.feature("Работоспособность меню")
 @allure.story("Корректный переход на страницу Кейсы")
 @allure.link("https://softmg.ru/", name="Testing")
-def test_open_page_softmg_contact():
+def test_open_page_softmg_cases():
 
     with allure.step("Открываем главную страницу сайта softmg"):
         page = HeaderPanel()
