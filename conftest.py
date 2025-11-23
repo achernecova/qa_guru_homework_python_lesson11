@@ -24,11 +24,13 @@ def setup_browser():
     browser.config.driver_options = chrome_options
     browser.config.timeout = 6
 
-    yield
+    yield driver
 
-    browser.quit()
     # аттачи
     attach.add_screenshot(browser)
     attach.add_logs(browser)
     # attach.add_video(browser)
     attach.add_html(browser)
+
+    browser.quit()
+
