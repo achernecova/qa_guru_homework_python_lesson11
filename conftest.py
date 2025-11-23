@@ -1,13 +1,38 @@
+# import pytest
+#
+# from selenium import webdriver
+# from selenium.webdriver.chrome.options import Options
+#
+#
+# @pytest.fixture(scope='function')
+# def setup_browser():
+#     options = Options()
+#
+#     options.set_capability("browserName", "chrome")
+#     options.set_capability("browserVersion", "128.0")
+#     options.set_capability("selenoid:options", {
+#         "enableVNC": True,
+#         "enableVideo": True
+#     })
+#
+#     driver = webdriver.Remote(
+#         command_executor="https://user1:1234@selenoid.autotests.cloud/wd/hub",
+#         options=options
+#     )
+#
+#     yield driver
+#
+#     driver.quit()
+
+
 import pytest
+from selene import browser
+from selenium.webdriver.chrome.options import Options as ChromeOptions
 
-from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
 
-
-@pytest.fixture(scope='function')
+@pytest.fixture(scope="function", autouse=True)
 def setup_browser():
-    options = Options()
-
+    options = ChromeOptions()
     options.set_capability("browserName", "chrome")
     options.set_capability("browserVersion", "128.0")
     options.set_capability("selenoid:options", {
@@ -15,14 +40,13 @@ def setup_browser():
         "enableVideo": True
     })
 
-    driver = webdriver.Remote(
-        command_executor="https://user1:1234@selenoid.autotests.cloud/wd/hub",
-        options=options
-    )
+    browser.config.driver_remote_url = "https://user1:1234@selenoid.autotests.cloud/wd/hub"
+    browser.config.driver_options = options
+    browser.config.timeout = 6
 
-    yield driver
+    yield
 
-    driver.quit()
+    browser.quit()
 
 # import pytest
 # from selene import browser
