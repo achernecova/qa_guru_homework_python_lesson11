@@ -31,7 +31,7 @@ def setup_browser():
     browser.config.timeout = 6
 
     yield
-
+    browser.driver.maximize_window()
     attach.add_screenshot(browser)
     # TODO - не работает прикрепление логов. Ошибка в дженкинсе AttributeError: 'WebDriver' object has no attribute 'get_log'
     # attach.add_logs(browser)

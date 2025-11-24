@@ -9,7 +9,7 @@ from tests.demoqa.pages.users import User
 @allure.severity(Severity.CRITICAL)
 @allure.label("owner", "chernetsova")
 @allure.feature("Успешная регистрация пользователя")
-@allure.story("Регистрация пользователя с заполнением всех полей - с данными из дата-класса")
+@allure.title("Заполнение формы с использованием appl manager")
 @allure.link("https://github.com", name="Testing")
 def test_registration_in_simple_form_with_app_manager():
     app.left_panel.open()
@@ -21,7 +21,7 @@ def test_registration_in_simple_form_with_app_manager():
 @allure.severity(Severity.CRITICAL)
 @allure.label("owner", "chernetsova")
 @allure.feature("Успешная регистрация пользователя")
-@allure.story("Регистрация пользователя с заполнением всех полей - с данными из appl manager")
+@allure.title("Заполнение формы с использованием данных из дата-класса")
 @allure.link("https://github.com", name="Testing")
 def test_registration_in_simple_form_with_app_manager_with_user():
     app.left_panel.open()
