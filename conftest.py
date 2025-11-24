@@ -1,26 +1,41 @@
+import os
+
 import pytest
-from selene import Config, Browser
+from selene import browser
+from selenium.webdriver.chrome.options import Options as ChromeOptions
+from dotenv import load_dotenv
+from utils import attach
 
-from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
+@pytest.fixture(scope="function", autouse=True)
+def load_env():
+    load_dotenv()
 
+selenoid_login = os.getenv("SELENOID_LOGIN")
+selenoid_pass = os.getenv("SELENOID_PASS")
+selenoid_url = os.getenv("SELENOID_URL")
 
-@pytest.fixture(scope="function")
-def browser(request):
-    options = Options()
-    capabilities = {
-        "browserName": "chrome",
-        "browserVersion": "128.0",
-        "selenoid:options": {
-            "enableVideo": False,
-            "enableVNC": False
-        }
-    }
-    options.capabilities.update(capabilities)
-    driver = webdriver.Remote(
-        command_executor="https://user1:1234@selenoid.autotests.cloud/wd/hub",
-        options=options)
+@pytest.fixture(scope="function", autouse=True)
+def setup_browser():
+    options = ChromeOptions()
+    options.set_capability("browserName", "chrome")
+    options.set_capability("browserVersion", "128.0")
+    options.add_argument("--window-size=1280,900")
+    options.set_capability("selenoid:options", {
+        "enableVNC": True,
+        "enableVideo": True
+    })
+    options.set_capability("goog:loggingPrefs", {'browser': 'ALL'})  # Включаем логирование браузера
 
-    browser = Browser(Config(driver))
-    yield browser
+    browser.config.driver_remote_url = "https://user1:1234@selenoid.autotests.cloud/wd/hub"
+    browser.config.driver_options = options
+    browser.config.timeout = 6
+
+    yield
+
+    attach.add_screenshot(browser)
+    # TODO - не работает прикрепление логов. Ошибка в дженкинсе AttributeError: 'WebDriver' object has no attribute 'get_log'
+    # attach.add_logs(browser)
+    attach.add_html(browser)
+    attach.add_video(browser)
+
     browser.quit()

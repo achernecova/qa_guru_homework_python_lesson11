@@ -4,7 +4,7 @@
 from selene import browser
 from selenium.webdriver.common.by import By
 
-from tests.demoqa.simple_page import SimplePage
+from tests.demoqa.pages.simple_page import SimplePage
 
 
 # Нашли левую панель.
