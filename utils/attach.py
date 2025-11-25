@@ -9,6 +9,7 @@ def add_screenshot(browser):
 def add_logs(browser):
     log = "".join(f'{text}\n' for text in browser.driver.get_log(log_type='browser'))
     allure.attach(log, 'browser_logs', AttachmentType.TEXT, '.log')
+
     # try:
     #     logs = browser.driver.get_log('browser')
     #     text = "\n".join([f"{l['level']}: {l['message']}" for l in logs])
