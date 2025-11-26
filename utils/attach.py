@@ -23,6 +23,9 @@ def add_logs(browser):
         allure.attach(log, 'browser_logs', AttachmentType.TEXT, '.log')
     except AttributeError as e:
         print(f"Метод get_log не поддерживается: {e}")
+        print(type(browser.driver))
+        print(browser.driver)
+        print(hasattr(browser.driver, 'get_log'))
         # Или allure.attach("Логи не доступны", name="browser_logs", attachment_type=AttachmentType.TEXT)
     except Exception as e:
         print(f"Произошла ошибка при получении логов: {e}")
