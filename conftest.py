@@ -15,8 +15,8 @@ selenoid_pass = os.getenv("SELENOID_PASS")
 selenoid_url = os.getenv("SELENOID_URL")
 
 @pytest.fixture(scope="function", autouse=True)
-def setup_browser(browser):
-    options = ChromeOptions()
+def setup_browser():
+    options = Options()
     options.set_capability("browserName", "chrome")
     options.set_capability("browserVersion", "128.0")
     options.add_argument("--window-size=1280,900")
@@ -24,20 +24,17 @@ def setup_browser(browser):
         "enableVNC": True,
         "enableVideo": True
     })
-    # Включение логов браузера
-    options.set_capability("goog:loggingPrefs", {'browser': 'ALL'})
+    options.set_capability("goog:loggingPrefs", {'browser': 'ALL'})  # Включаем логирование браузера
 
-    # Укажите URL удаленного WebDriver (Selenoid)
     browser.config.driver_remote_url = "https://user1:1234@selenoid.autotests.cloud/wd/hub"
     browser.config.driver_options = options
     browser.config.timeout = 6
 
     yield
-
-    # После каждого теста
     browser.driver.maximize_window()
     attach.add_screenshot(browser)
-    attach.add_logs(browser)  # Здесь вызов с обработкой поддержки логов
+    # TODO - не работает прикрепление логов. Ошибка в дженкинсе AttributeError: 'WebDriver' object has no attribute 'get_log'
+    attach.add_logs(browser)
     attach.add_html(browser)
     attach.add_video(browser)
 
