@@ -20,16 +20,17 @@ def add_screenshot(browser):
 def add_logs(browser):
     try:
         driver = browser.driver
-        # Проверка, есть ли метод
+        # Проверка наличия метода get_log
         if hasattr(driver, 'get_log'):
             logs = driver.get_log("browser")
-            log_text = "".join(f'{text}\n' for text in logs)
-            allure.attach(log_text, 'browser_logs', AttachmentType.TEXT, '.log')
+            log_text = "".join(f'{entry["message"]}\n' for entry in logs)
+            allure.attach(log_text, 'browser_logs', AttachmentType.TEXT)
         else:
             # Логи недоступны
             allure.attach("Логи не доступны для текущего драйвера", name="browser_logs", attachment_type=AttachmentType.TEXT)
     except Exception as e:
         print(f"Ошибка при получении логов: {e}")
+        allure.attach(f"Произошла ошибка при получении логов: {e}", name="error_log", attachment_type=AttachmentType.TEXT)
 
 def add_html(browser):
     html = browser.driver.page_source
