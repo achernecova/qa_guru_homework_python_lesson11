@@ -34,7 +34,7 @@ def setup_browser():
     browser.driver.maximize_window()
     attach.add_screenshot(browser)
     # TODO - не работает прикрепление логов. Ошибка в дженкинсе AttributeError: 'WebDriver' object has no attribute 'get_log'
-    #attach.add_logs(browser)
+    attach.add_logs(browser)
     attach.add_html(browser)
     attach.add_video(browser)
 

@@ -11,7 +11,7 @@ from tests.demoqa.pages.users import User
 @allure.feature("Успешная регистрация пользователя")
 @allure.title("Заполнение формы с использованием appl manager")
 @allure.link("https://github.com", name="Testing")
-def test_registration_in_simple_form_with_app_manager():
+def test_registration_in_simple_form_with_app_manager(setup_browser):
     app.left_panel.open()
     app.simple_page.fill_full_name(users.first_user)
 
@@ -23,7 +23,7 @@ def test_registration_in_simple_form_with_app_manager():
 @allure.feature("Успешная регистрация пользователя")
 @allure.title("Заполнение формы с использованием данных из дата-класса")
 @allure.link("https://github.com", name="Testing")
-def test_registration_in_simple_form_with_app_manager_with_user():
+def test_registration_in_simple_form_with_app_manager_with_user(setup_browser):
     app.left_panel.open()
     user = User(
         fullname="Alexandra",
